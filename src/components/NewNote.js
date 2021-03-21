@@ -18,8 +18,12 @@ const NewNote = ({createNote}) => {
     );
 };
 
-const mapDispatchToProps = {
-    createNote
-};
+// const mapDispatchToProps = {
+//     createNote
+// };
+
+const mapDispatchToProps = dispatch => ({
+    createNote: content => dispatch(createNote(content))
+});
 
 export default connect(null, mapDispatchToProps)(NewNote);
