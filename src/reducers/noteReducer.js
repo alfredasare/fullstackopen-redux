@@ -1,17 +1,4 @@
-const initialState = [
-    {
-        content: 'reducer defines how redux store works',
-        important: true,
-        id: 1,
-    },
-    {
-        content: 'state of store can contain any data',
-        important: false,
-        id: 2,
-    },
-]
-
-const noteReducer = (state = initialState, action) => {
+const noteReducer = (state = [], action) => {
     switch (action.type) {
         case 'NEW_NOTE':
             return [...state, action.payload];
@@ -28,21 +15,20 @@ const noteReducer = (state = initialState, action) => {
             ));
         }
 
+        case 'INIT_NOTES':
+            return action.payload;
+
         default:
             return state;
     }
 };
 
-const generateId = () => Math.floor(Math.random() * 1000000);
+// const generateId = () => Math.floor(Math.random() * 1000000);
 
 //  Action creators
 export const createNote = content => ({
     type: 'NEW_NOTE',
-    payload: {
-        content,
-        important: false,
-        id: generateId()
-    }
+    payload: content
 });
 
 export const toggleImportanceOf = id => ({
@@ -50,6 +36,11 @@ export const toggleImportanceOf = id => ({
     payload: {
         id
     }
+});
+
+export const initializeNotes = payload => ({
+    type: 'INIT_NOTES',
+    payload
 });
 
 export default noteReducer;
